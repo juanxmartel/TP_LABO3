@@ -1,4 +1,4 @@
 package Modelos.Clases;
 
-public class Pandaren extends Personaje {
+public class Pandaren {
 }

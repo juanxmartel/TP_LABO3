@@ -1,5 +1,5 @@
 package Modelos.Clases;
 
-public class NoMuerto extends Humano {
+public class NoMuerto {
 
 }

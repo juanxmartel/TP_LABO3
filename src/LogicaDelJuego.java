@@ -7,6 +7,7 @@ import static Modelos.Clases.TodasLasClases.NoMuerto;
 
 public class LogicaDelJuego {
     Scanner scanner;
+    Personaje personajePrincipal;
 
     //crear un jugador
 
@@ -98,14 +99,15 @@ public class LogicaDelJuego {
                     //inicia la pelea
                     while (vivo)
                         {
-                            System.out.println("Que ataque vas a usar?");
+
+                            System.out.println("Que vas a hacer?");
+                            scanner.next();
+                            leerUnInputInt();
                             //faltan los ataques AUXILIO
                             //en caso de que sea ataque
-                            enemigo.recibirGolpe(personajePrincipal.dano-enemigo.nivel*2);
-                            personajePrincipal.recibirGolpe(enemigo.dano-personajePrincipal.nivel);
+
                             //en caso de que sea defender
-                            personajePrincipal.defenderse;
-                            if (enemigo.vida<0){
+                            if (enemigo.getVida()<0){
                                 vivo=false;
                                 System.out.println("ganaste el combate");
                             }

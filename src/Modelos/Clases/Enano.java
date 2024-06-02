@@ -1,6 +1,6 @@
 package Modelos.Clases;
 
-public class Enano extends Personaje {
+public class Enano {
     @Override
     public void agregarObjeto() {
 
