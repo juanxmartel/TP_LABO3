@@ -10,8 +10,8 @@ public abstract class Arma extends Item {
         return dano;
     }
 
-    public Arma(String nombre, double peso, double dano, TipoArma tipo) {
-        super(nombre, peso);
+    public Arma(String nombre, double peso,int id, double dano, TipoArma tipo) {
+        super(nombre, peso, id);
         this.dano = dano;
         this.tipo = tipo;
     }

@@ -144,6 +144,13 @@ public abstract class Personaje implements iManejoInventario {
         System.out.println(objetivo.nombre + " tiene " + objetivo.getVida() + " puntos de salud restantes.");
     }
 
+    public void recibirDanio(double dano) {
+        this.vida -= dano;
+        if (this.vida < 0) {
+            this.vida = 0;
+        }
+    }
+
     //enum estado de animo
 
 
