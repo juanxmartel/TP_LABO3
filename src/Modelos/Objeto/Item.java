@@ -5,19 +5,14 @@ public abstract class Item {
     private double peso;
     private int id;
 
-
     public Item(String nombre, double peso) {
-        this.id=id++;
         this.nombre = nombre;
         this.peso = peso;
+        this.id++;
     }
 
     public double getPeso() {
         return peso;
-    }
-
-    public String getNombre() {
-        return nombre;
     }
 }
 

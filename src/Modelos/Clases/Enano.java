@@ -1,35 +1,53 @@
 package Modelos.Clases;
 
-import Interfaces.IPlacaje;
+import Interfaces.iAtaque;
+import Modelos.Objeto.Arma;
+import Modelos.Objeto.Item;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
-public class Enano extends Personaje implements IPlacaje {
+public class Enano extends Personaje implements iAtaque {
 
-    Scanner scanner;
-    public void atacar(Personaje objetivo){
-        System.out.println("Tus ataques son:");
-        System.out.println("1: placaje");
-        System.out.println("2: ataque espada");
-       double danio=0;
-        scanner = new Scanner(System.in);
-        scanner.nextInt();
-       objetivo.recibirDanio(danio);
+    public Enano(String nombre, double vida, int nivel, int experiencia, int experienciaNecesariaParaSubir, Arma arma, ArrayList<Item> inventario) {
+        super(nombre, vida, nivel, experiencia, experienciaNecesariaParaSubir, arma, inventario);
     }
 
+    @Override
+    public void agregarObjeto() {
+
+    }
 
     @Override
-    public double placaje(Personaje enemigo) {
-        double danio=20;
-        danio-= enemigo.getNivel()*3 ;
-        if(enemigo instanceof NoMuerto)
-        {
-            danio=9999999;
-            System.out.println("Desarmaste el pobre cadaver");
+    public void retirarObjeto() {
 
-        }
-        System.out.println("Arremete con su pequeño cuerpo sobre el enemigo haciendole "+danio);
-        return danio;
+    }
 
+    @Override
+    public void verInventario() {
+
+    }
+
+    @Override
+    public void calcularPeso() {
+
+    }
+
+    @Override
+    public void robarObjeto() {
+
+    }
+    @Override
+    public void placaje(Personaje enemigo) {
+        double dano = 10; // Daño de ejemplo
+        enemigo.recibirDanio(dano);
+        System.out.println(nombre + " usa Placaje contra " + enemigo.getNombre() + " causando " + dano + " de daño.");
+    }
+
+    public void cabezazo(Personaje enemigo) {
+        double dano = 15; // Daño de ejemplo
+        double autoDanio = 5; // Daño recibido por el propio personaje
+        enemigo.recibirDanio(dano);
+        this.recibirDanio(autoDanio);
+        System.out.println(nombre + " usa Cabezazo contra " + enemigo.getNombre() + " causando " + dano + " de daño y recibiendo " + autoDanio + " de daño.");
     }
 }

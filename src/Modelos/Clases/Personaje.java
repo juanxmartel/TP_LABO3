@@ -104,6 +104,13 @@ public abstract class Personaje  {
 
     }
 
+    public void recibirDanio(double dano) {
+        this.vida -= dano;
+        if (this.vida < 0) {
+            this.vida = 0;
+        }
+    }
+
     //enum estado de animo
 
 
