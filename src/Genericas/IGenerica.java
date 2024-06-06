@@ -30,5 +30,5 @@ public interface IGenerica<T> {
      * Muestra los elementos
      * @return texto con elementos
      */
-    void listarElementos();
+    String listarElementos();
 }

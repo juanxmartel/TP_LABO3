@@ -1,5 +1,6 @@
 package Modelos.Clases;
 
+<<<<<<< HEAD
 import Interfaces.iAtaque;
 import Modelos.Objeto.Arma;
 import Modelos.Objeto.Item;
@@ -14,6 +15,31 @@ public class Enano extends Personaje implements iAtaque {
 
     @Override
     public void agregarObjeto() {
+=======
+public class Enano {
+    @Override
+    public void agregarObjeto() {
+
+    }
+
+    @Override
+    public void retirarObjeto() {
+
+    }
+
+    @Override
+    public void verInventario() {
+
+    }
+
+    @Override
+    public void calcularPeso() {
+
+    }
+
+    @Override
+    public void robarObjeto() {
+>>>>>>> parent of 0f512fd (Modfiicaciones locuras)
 
     }
 
