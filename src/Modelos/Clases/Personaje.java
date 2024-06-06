@@ -4,11 +4,12 @@ import Genericas.ListaGenerica;
 import Modelos.Objeto.Arma;
 import Modelos.Objeto.Item;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-public abstract class Personaje  {
+public abstract class Personaje implements Serializable {
     private String nombre;
     private double vida;
     private int nivel;
@@ -100,8 +101,13 @@ public abstract class Personaje  {
 
     public void recibirDanio(double danio)
     {
+        System.out.println(this.getNombre()+" recibio " +danio +"daño");
         this.setVida(getVida()-danio);
 
+    }
+    public double atacarConArma()
+    {
+        return arma.getDano();
     }
 
 

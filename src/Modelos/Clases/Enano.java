@@ -30,7 +30,7 @@ public class Enano extends Personaje implements IPlacaje, iCabezaso {
 
     @Override
         public double placaje (Personaje enemigo) {
-        double danio=20;
+        double danio=20*getNivel();
         danio-= enemigo.getNivel()*3 ;
         if(enemigo instanceof NoMuerto)
         {
@@ -48,8 +48,9 @@ public class Enano extends Personaje implements IPlacaje, iCabezaso {
         danio-= enemigo.getNivel()*3 ;
         if(enemigo instanceof Pandaren)
         {
-            danio=0;
             System.out.println("Le pegaste en la rodilla y te hiciste "+danio +"de daño");
+            this.setVida(getVida()-danio);
+            danio=0;
 
         }
         System.out.println("Arremete con su pequeño craneo sobre el enemigo haciendole "+danio);

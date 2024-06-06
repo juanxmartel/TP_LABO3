@@ -1,8 +1,5 @@
 import Enums.TipoArma;
 import Modelos.Objeto.Arma;
-import Modelos.Objeto.ArmasDistancia;
-import Modelos.Objeto.ArmasMagicas;
-import Modelos.Objeto.ArmasMelee;
 
 import java.util.Scanner;
 
