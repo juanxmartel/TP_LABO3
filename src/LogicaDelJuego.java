@@ -15,6 +15,7 @@ public class LogicaDelJuego {
         //hay que ver como crear un jugador dependiendo del q elija
         System.out.println("que clase desea ser");
 
+        return null;
     }
 
     // crear un input y enviar una excepcion en caso de que este mal el input
@@ -75,7 +76,6 @@ public class LogicaDelJuego {
         }
     }
 
-        //solo dios y yo sabemos que hace esto, mañana solo dios
        public void batallaAleatoria(){
        limpiarConsola();
        //llamo a crear una clase aleatoria y se lo envio a que instancie el espacio en memoria y devuelva un objeto que sera un enemigo
@@ -85,6 +85,7 @@ public class LogicaDelJuego {
             presionarParaContinuar();
             batalla((Personaje) random);
        }
+
         public void batalla(Personaje enemigo)
         {
             boolean vivo = true;
@@ -97,28 +98,27 @@ public class LogicaDelJuego {
                 int input = leerUnInputInt("(1) Pelear (2) Correr ",2);
                 if(input==1){
                     //inicia la pelea
-                    while (vivo)
-                        {
+                    while (vivo) {
 
-                            System.out.println("Que vas a hacer?");
-                            scanner.next();
-                            leerUnInputInt();
-                            //faltan los ataques AUXILIO
-                            //en caso de que sea ataque
+                        System.out.println("Que vas a hacer?");
+                        scanner.next();
+                        leerUnInputInt("atacar o huir", 2);
 
-                            //en caso de que sea defender
-                            if (enemigo.getVida()<0){
-                                vivo=false;
-                                System.out.println("ganaste el combate");
-                            }
-                            if (personajePrincipal.vida<0){
-                                vivo=false;
-                                System.out.println("perdiste el combate, tu alma esta en pena");
-                            }
+                        //faltan los ataques AUXILIO
+                        //en caso de que sea ataque
 
-
+                        //en caso de que sea defender
+                        if (enemigo.getVida() < 0) {
+                            vivo = false;
+                            System.out.println("ganaste el combate");
                         }
-                    System.out.println();
+                        if (personajePrincipal.getVida() < 0) {
+                            vivo = false;
+                            System.out.println("perdiste el combate, tu alma esta en pena");
+                        }
+
+
+                    }
                 }
 
             }

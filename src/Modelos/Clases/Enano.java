@@ -1,79 +1,60 @@
 package Modelos.Clases;
 
-<<<<<<< HEAD
-import Interfaces.iAtaque;
+import Genericas.ListaGenerica;
+import Interfaces.IPlacaje;
+import Interfaces.iCabezaso;
 import Modelos.Objeto.Arma;
 import Modelos.Objeto.Item;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Enano extends Personaje implements iAtaque {
+public class Enano extends Personaje implements IPlacaje, iCabezaso {
 
-    public Enano(String nombre, double vida, int nivel, int experiencia, int experienciaNecesariaParaSubir, Arma arma, ArrayList<Item> inventario) {
+    Scanner scanner;
+
+    public Enano(String nombre, double vida, int nivel, int experiencia, int experienciaNecesariaParaSubir, Arma arma, ListaGenerica<Item> inventario) {
         super(nombre, vida, nivel, experiencia, experienciaNecesariaParaSubir, arma, inventario);
     }
 
-    @Override
-    public void agregarObjeto() {
-=======
-public class Enano {
-    @Override
-    public void agregarObjeto() {
-
+    public void atacar(Personaje objetivo){
+        System.out.println("Tus ataques son:");
+        System.out.println("1: placaje");
+        System.out.println("2: ataque espada");
+        System.out.println("3: cabezaso");
+        double danio=0;
+        scanner = new Scanner(System.in);
+        scanner.nextInt();
+        objetivo.recibirDanio(danio);
     }
 
     @Override
-    public void retirarObjeto() {
+        public double placaje (Personaje enemigo) {
+        double danio=20;
+        danio-= enemigo.getNivel()*3 ;
+        if(enemigo instanceof NoMuerto)
+        {
+            danio=9999999;
+            System.out.println("Desarmaste el pobre cadaver");
 
+        }
+        System.out.println("Arremete con su pequeño cuerpo sobre el enemigo haciendole "+danio);
+        return danio;
     }
 
     @Override
-    public void verInventario() {
+    public double cabezaso(Personaje enemigo) {
+        double danio=20;
+        danio-= enemigo.getNivel()*3 ;
+        if(enemigo instanceof Pandaren)
+        {
+            danio=0;
+            System.out.println("Le pegaste en la rodilla y te hiciste "+danio +"de daño");
 
-    }
-
-    @Override
-    public void calcularPeso() {
-
-    }
-
-    @Override
-    public void robarObjeto() {
->>>>>>> parent of 0f512fd (Modfiicaciones locuras)
-
-    }
-
-    @Override
-    public void retirarObjeto() {
-
-    }
-
-    @Override
-    public void verInventario() {
-
-    }
-
-    @Override
-    public void calcularPeso() {
-
-    }
-
-    @Override
-    public void robarObjeto() {
-
-    }
-    @Override
-    public void placaje(Personaje enemigo) {
-        double dano = 10; // Daño de ejemplo
-        enemigo.recibirDanio(dano);
-        System.out.println(nombre + " usa Placaje contra " + enemigo.getNombre() + " causando " + dano + " de daño.");
-    }
-
-    public void cabezazo(Personaje enemigo) {
-        double dano = 15; // Daño de ejemplo
-        double autoDanio = 5; // Daño recibido por el propio personaje
-        enemigo.recibirDanio(dano);
-        this.recibirDanio(autoDanio);
-        System.out.println(nombre + " usa Cabezazo contra " + enemigo.getNombre() + " causando " + dano + " de daño y recibiendo " + autoDanio + " de daño.");
+        }
+        System.out.println("Arremete con su pequeño craneo sobre el enemigo haciendole "+danio);
+        return danio;
     }
 }
+
+
