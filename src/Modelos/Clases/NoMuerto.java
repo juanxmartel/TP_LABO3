@@ -1,5 +1,7 @@
 package Modelos.Clases;
 
-public class NoMuerto {
+import Interfaces.iCabezaso;
+
+public class NoMuerto extends Humano implements iCabezaso {
 
 }

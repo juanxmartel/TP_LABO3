@@ -1,21 +1,21 @@
 package Modelos.Clases;
 
+import Genericas.ListaGenerica;
 import Modelos.Objeto.Arma;
-import Interfaces.iManejoInventario;
 import Modelos.Objeto.Item;
 
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-public abstract class Personaje implements iManejoInventario {
+public abstract class Personaje  {
     private String nombre;
     private double vida;
     private int nivel;
     private int experiencia;
     private int experienciaNecesariaParaSubir;
     private Arma arma;
-    private ArrayList<Item> inventario;
+    private ListaGenerica<Item> inventario;
 
     public Personaje(String nombre, double vida, int nivel, int experiencia, int experienciaNecesariaParaSubir, Arma arma, ArrayList<Item> inventario) {
         this.nombre = nombre;
@@ -24,7 +24,7 @@ public abstract class Personaje implements iManejoInventario {
         this.experiencia = experiencia;
         this.experienciaNecesariaParaSubir = experienciaNecesariaParaSubir;
         this.arma = arma;
-        this.inventario = inventario;
+        this.inventario = new ListaGenerica<Item>();
     }
 
     public String getNombre() {
@@ -72,7 +72,7 @@ public abstract class Personaje implements iManejoInventario {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Personaje personaje)) return false;
-        return Double.compare(getVida(), personaje.getVida()) == 0 && getNivel() == personaje.getNivel() && getExperiencia() == personaje.getExperiencia() && getExperienciaNecesariaParaSubir() == personaje.getExperienciaNecesariaParaSubir() && Objects.equals(getNombre(), personaje.getNombre()) && Objects.equals(getArma(), personaje.getArma()) && Objects.equals(getInventario(), personaje.getInventario());
+        return Double.compare(getVida(), personaje.getVida()) == 0 && getNivel() == personaje.getNivel() && getExperiencia() == personaje.getExperiencia() && getExperienciaNecesariaParaSubir() == personaje.getExperienciaNecesariaParaSubir() && Objects.equals(getNombre(), personaje.getNombre()) && Objects.equals(getArma(), personaje.getArma());
     }
 
     @Override
@@ -82,66 +82,26 @@ public abstract class Personaje implements iManejoInventario {
 
     //implementar interfaz inventario
 
-    @Override
-    public void agregarObjeto(Item objeto) {
-        inventario.add(objeto);
 
-    }
-
-    @Override
-    public void retirarObjeto(Item objeto) {
-        inventario.remove(objeto);
-
-    }
-
-    @Override
-    public void verInventario() {
-        int i =0;
-        for(Item objetos:inventario)
-        {
-            System.out.println(i);
-            System.out.println(objetos.toString());
-            i++;
-        }
-
-    }
-
-    @Override
-    public void calcularPeso() {
-    for(Item objetos:inventario){
-        double peso=0;
-        peso+= objetos.getPeso();
-    }
-
-    }
 
     Scanner scanner;
-    @Override
+
     public void agarrarObjeto(Personaje objetivo) {
-        objetivo.verInventario();
+        objetivo.inventario.listarElementos();
         new Scanner(System.in);
         System.out.println("cual desea agarrar?");
         int opcion= scanner.nextInt();
-        this.inventario.add(objetivo.inventario.get(opcion));
+        this.inventario.agregarElemento(objetivo.inventario.devolverUno(opcion));
     }
 
-    public void agarrarTodosLosObjetos(Personaje objetivo)
-    {
-        for(Item objetos:objetivo.inventario)
-        {
-            int opcion=0;
-            this.inventario.add(objetivo.inventario.get(opcion));
-            opcion++;
-        }
-    }
 
     //Ataque
-    public void atacar(Personaje objetivo){
-        double danio = this.arma.getDano();
-        danio= danio-objetivo.nivel*2;
-        System.out.println(this.getNombre() + " ha hecho " + danio + " puntos de daño a " + objetivo.nombre + ".");
-        objetivo.vida-=danio;
-        System.out.println(objetivo.nombre + " tiene " + objetivo.getVida() + " puntos de salud restantes.");
+    public abstract void atacar(Personaje objetivo);
+
+    public void recibirDanio(double danio)
+    {
+        this.setVida(getVida()-danio);
+
     }
 
     //enum estado de animo
