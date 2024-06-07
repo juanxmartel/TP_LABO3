@@ -2,15 +2,23 @@ package Modelos.Clases;
 
 import APIclima.ClimaAPI;
 import APIclima.DatosClima;
+import Enums.TipoArma;
+import Genericas.ListaGenerica;
+import Modelos.Objeto.Arma;
+import Modelos.Objeto.Item;
 
 import java.util.Scanner;
 
 public class ElfoMago extends Personaje {
-
-
     Scanner scanner;
 
     DatosClima datos = new DatosClima();
+
+    public ElfoMago(String nombre, double vida, int nivel, ListaGenerica<Item> inventario) {
+        super(nombre, vida, 1, inventario);
+        Arma Baston = new Arma("Baston",6,30, TipoArma.FUEGO);
+        this.setArma(Baston);
+    }
 
     @Override
     public void atacar(Personaje objetivo) {
@@ -31,7 +39,6 @@ public class ElfoMago extends Personaje {
         }
         objetivo.recibirDanio(danio);
     }
-
     public double bolaDeFuego(){
         double danio =0;
         if (datos.getHumedad()>80)
@@ -41,13 +48,9 @@ public class ElfoMago extends Personaje {
         }else {
             danio=35;
             System.out.println("Gracias a la humedad tu bola de fuego hace mas daño, hizo"+danio);
-
         }
-
-
         return danio;
     }
-
     public double impacTrueno(){
         double danio=0;
         if(datos.getHumedad()>80)
@@ -75,6 +78,7 @@ public class ElfoMago extends Personaje {
             }
         return danio;
     }
+
     public double hidroBomba(){
         double danio=0;
         if(datos.getHumedad()>80)

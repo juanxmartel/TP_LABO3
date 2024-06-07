@@ -1,13 +1,26 @@
 package Modelos.Clases;
 
+import Enums.TipoArma;
+import Genericas.ListaGenerica;
 import Interfaces.IPlacaje;
 import Interfaces.iCabezaso;
+import Modelos.Objeto.Arma;
+import Modelos.Objeto.Item;
 
 import java.util.Scanner;
 
 public class Humano extends Personaje implements IPlacaje, iCabezaso {
 
     Scanner scanner;
+
+
+
+    public Humano(String nombre, double vida, int nivel, ListaGenerica<Item> inventario) {
+        super(nombre, vida, 1, inventario);
+        Arma Latigo = new Arma("Latigo",2,20, TipoArma.ELECTRICO);
+        this.setArma(Latigo);
+    }
+
     @Override
     public double placaje (Personaje enemigo) {
         double danio=15*getNivel();

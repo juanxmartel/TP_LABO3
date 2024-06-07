@@ -1,12 +1,24 @@
 package Modelos.Clases;
 
+import Enums.TipoArma;
+import Genericas.ListaGenerica;
 import Interfaces.iNecormancia;
+import Modelos.Objeto.Arma;
+import Modelos.Objeto.Item;
 
 import java.util.Scanner;
 
 public class NoMuerto extends Humano implements iNecormancia {
 
     Scanner scanner;
+
+    public NoMuerto(String nombre, double vida, int nivel, ListaGenerica<Item> inventario) {
+        super(nombre, vida, 1,inventario);
+        Arma Ancla = new Arma("Ancla sucia",25,20.5, TipoArma.HIELO);
+        this.setArma(Ancla);
+
+    }
+
 
     @Override
     public void atacar(Personaje objetivo) {

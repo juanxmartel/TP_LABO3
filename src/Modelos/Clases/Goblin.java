@@ -1,11 +1,21 @@
 package Modelos.Clases;
 
+import Enums.TipoArma;
+import Genericas.ListaGenerica;
+import Modelos.Objeto.Arma;
+import Modelos.Objeto.Item;
+
 import java.util.Scanner;
 
 public class Goblin extends Personaje {
-
-
     Scanner scanner;
+
+
+    public Goblin(String nombre, double vida, int nivel, ListaGenerica<Item> inventario) {
+        super(nombre, vida,1 ,inventario);
+        Arma ArcoYFlecha = new Arma("ArcoYFlechas",14,40, TipoArma.FUEGO);
+        this.setArma(ArcoYFlecha);
+    }
 
     @Override
     public void atacar(Personaje objetivo) {

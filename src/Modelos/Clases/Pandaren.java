@@ -1,12 +1,23 @@
 package Modelos.Clases;
 
+import Enums.TipoArma;
+import Genericas.ListaGenerica;
 import Interfaces.IPlacaje;
+import Modelos.Objeto.Arma;
+import Modelos.Objeto.Item;
 
 import java.util.Scanner;
 
 public class Pandaren extends Personaje implements IPlacaje {
 
     Scanner scanner;
+
+    public Pandaren(String nombre, double vida, int nivel ,ListaGenerica<Item> inventario) {
+        super(nombre, vida, 1, inventario);
+        Arma PalitoBambu = new Arma("PalitoBambu",4.5,15, TipoArma.AGUA);
+        this.setArma(PalitoBambu);
+    }
+
     @Override
     public void atacar(Personaje objetivo) {
         System.out.println("Tus ataques son:");

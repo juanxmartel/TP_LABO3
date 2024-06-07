@@ -1,5 +1,6 @@
 package Modelos.Clases;
 
+import Enums.TipoArma;
 import Genericas.ListaGenerica;
 import Interfaces.IPlacaje;
 import Interfaces.iCabezaso;
@@ -13,9 +14,12 @@ public class Enano extends Personaje implements IPlacaje, iCabezaso {
 
     Scanner scanner;
 
-    public Enano(String nombre, double vida, int nivel, int experiencia, int experienciaNecesariaParaSubir, Arma arma, ListaGenerica<Item> inventario) {
-        super(nombre, vida, nivel, experiencia, experienciaNecesariaParaSubir, arma, inventario);
+    public Enano(String nombre, double vida, int nivel, ListaGenerica<Item> inventario) {
+        super(nombre, vida + 30 ,1,inventario);
+        Arma garrote = new Arma("Garrote",30,20, TipoArma.HIELO);
+        this.setArma(garrote);
     }
+
 
     public void atacar(Personaje objetivo){
         System.out.println("Tus ataques son:");

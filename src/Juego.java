@@ -53,9 +53,6 @@ public class Juego {
         System.out.print("Elige el tipo de arma (FUEGO, ELECTRICO, HIELO, AGUA): ");
         String tipoArmaInput = scanner.nextLine();
         TipoArma tipoArma = TipoArma.valueOf(tipoArmaInput);
-
-        Arma armaInicial = new ArmasMelee(nombreArma, danoArma,danoArma,tipoArma);
-
         // Inventario inicial vacío
         ArrayList<Item> inventario = new ArrayList<>();
 
@@ -63,7 +60,7 @@ public class Juego {
         Personaje nuevoPersonaje = null;
         switch (clase) {
             case Enano:
-                nuevoPersonaje = new Enano(nombre, vida, nivel, experiencia, experienciaNecesariaParaSubir, armaInicial, inventario);
+                nuevoPersonaje = new Enano(nombre,100,);
                 break;
             case Humano:
                 nuevoPersonaje = new Humano(nombre, vida, nivel, experiencia, experienciaNecesariaParaSubir, armaInicial, inventario);
