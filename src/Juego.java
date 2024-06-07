@@ -1,10 +1,16 @@
+import APIclima.ClimaAPI;
+import APIclima.DatosClima;
 import Enums.TipoArma;
 import Enums.Zona;
 import Modelos.Clases.*;
 import Modelos.Objeto.Arma;
 import Modelos.Objeto.Item;
+import Genericas.ListaGenerica;
+import Persistencia.Archivos;
 
 import java.util.*;
+
+import static Persistencia.Archivos.*;
 
 public class Juego {
     private Scanner scanner;
@@ -12,32 +18,56 @@ public class Juego {
     private HashMap<Zona, ArrayList<Personaje>> enemigosPorZona;
     private Personaje jugador;
 
+    Item viniloSorpresa = new Item("Fragmento de Vinilo de Help!", 5.0);
+
+
     public Juego() {
         scanner = new Scanner(System.in);
         zonaActual = Zona.SELVA; // Zona inicial
-        enemigosPorZona = inicializarEnemigos(); // Assign the returned map
-        jugador = crearJugadors();
+        enemigosPorZona = inicializarEnemigos();
+        System.out.println("1. Crear Jugador");
+        System.out.println("2. Cargar Partida");
+        int opcion = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (opcion) {
+            case 1:
+                jugador = crearJugadors();
+                break;
+            case 2:
+                System.out.print("Ingresa el nombre del personaje: ");
+                String nombre = scanner.nextLine();
+                jugador = cargarPersonaje(nombre);
+                if (jugador == null) {
+                    System.out.println("No se pudo cargar el personaje. Creando un nuevo personaje.");
+                    jugador = crearJugadors();
+                }
+        }
     }
 
     private HashMap<Zona, ArrayList<Personaje>> inicializarEnemigos() {
         HashMap<Zona, ArrayList<Personaje>> localEnemigosPorZona = new HashMap<>();
 
+
+
         localEnemigosPorZona.put(Zona.SELVA, new ArrayList<>(Arrays.asList(
-                new Enano("Jaguar", 50, 1),
-                new Enano("Serpiente", 30, 1),
-                new Enano("Tribu Hostil", 70, 2)
+                new Goblin("Goblin errante", 50, 1),
+                new NoMuerto("Doctor Pocovivo", 30, 1),
+                new Pandaren("Panda bimbo", 70, 2)
+
+
         )));
 
         localEnemigosPorZona.put(Zona.DESIERTO, new ArrayList<>(Arrays.asList(
-                new Enano("Escorpion", 40, 3),
-                new Enano("Ladron del Desierto", 60, 4),
-                new Enano("Serpiente de Arena", 50, 4)
+                new ElfoMago("El mago cocina del desierto", 40, 3),
+                new Enano("Pequeño Ladron del Desierto", 60, 4),
+                new Goblin("Goblin de las Arenas", 50, 4)
         )));
 
         localEnemigosPorZona.put(Zona.CIUDAD, new ArrayList<>(Arrays.asList(
-                new Enano("Pandillero", 45, 5),
-                new Enano("Ladron", 35, 6),
-                new Enano("Policia Corrupto", 70, 7)
+                new Humano("Pandillero", 45, 5),
+                new Humano("Ladron", 35, 6),
+                new Humano("Policia Corrupto", 70, 7)
         )));
 
         return localEnemigosPorZona;
@@ -74,12 +104,16 @@ public class Juego {
     }
 
     public void mostrarMenu() {
-        while (true) {
+        crearArchivos("juani");
+        boolean menu= true;
+        while (menu) {
+            limpiarConsola();
             System.out.println("Menú principal:");
             System.out.println("1. Explorar");
             System.out.println("2. Ver estadísticas");
             System.out.println("3. Inventario");
-            System.out.println("4. Tampco");
+            System.out.println("4. Ir a la tienda");
+            System.out.println("5. Guardar Partida");
             System.out.print("Elige una opción: ");
             int opcion = scanner.nextInt();
             scanner.nextLine(); // Limpiar el buffer
@@ -87,15 +121,25 @@ public class Juego {
             switch (opcion) {
                 case 1:
                     explorar();
+                    limpiarConsola();
                     break;
                 case 2:
                     jugador.mostrarEstadisticas();
+                    presionarParaContinuar();
+                    limpiarConsola();
                     break;
                 case 3:
                     jugador.verInventario();
+                    presionarParaContinuar();
+                    limpiarConsola();
                     break;
                 case 4:
-                    cambiarZona();
+                    irTienda();
+                    limpiarConsola();
+                    break;
+                case 5:
+                    System.out.println("Guardado");
+                    guardarPersonaje(jugador,"juani");
                     break;
                 default:
                     System.out.println("Opción no válida. Inténtalo de nuevo.");
@@ -120,10 +164,12 @@ public class Juego {
 
             switch (eleccion) {
                 case 1:
+                    limpiarConsola();
                     jugador.atacar(enemigo);
                     presionarParaContinuar();
                     break;
                 case 2:
+                    limpiarConsola();
                     jugador.subirNivel();
 
                     break;
@@ -135,10 +181,10 @@ public class Juego {
             System.out.println("Vida del enemigo (" + enemigo.getNombre() + "): " + enemigo.getVida());
 
             if (enemigo.getVida() <= 0) {
-
                 System.out.println(enemigo.getNombre() + " ha sido derrotado.");
                 jugador.subirNivel();
-               // jugador.agarrarObjeto(enemigo);
+                enemigo.getInventario().agregarElemento(viniloSorpresa);
+                jugador.agarrarObjeto(enemigo);
                 enemigoVivo = false;
                 break;
             }
@@ -160,9 +206,27 @@ public class Juego {
         }
     }
 
-    private void irATienda() {
-        // Implementa la lógica de la tienda aquí
-        System.out.println("Bienvenido a la tienda.");
+
+
+    public void irTienda()
+    {
+        System.out.println("Hola Viajero necesito que me traigas mis fragmentos de vinilo para poder escuchar mi musica");
+        System.out.println("Mata a esos malditas alimandrias para recuperarlos, te dare una recompensa cuando me traigas 3 y 9 fragementos");
+        presionarParaContinuar();
+        limpiarConsola();
+        if(jugador.inventario.contarElementosEspecifico(viniloSorpresa)>=3){
+            Arma poderosa = new Arma("Gibson J-160E ",2,50, TipoArma.HIELO);
+            System.out.println("Toma esta gran guitarra sin cuerdas, te ayudara a golpearlos mejor");
+            jugador.setArma(poderosa);
+
+        } else if (jugador.inventario.contarElementosEspecifico(viniloSorpresa)>=9) {
+            Arma poderosaElectrica = new Arma("Bajo Iconico Hofner de P. Mc",2,100, TipoArma.ELECTRICO);
+            System.out.println("Toma este iconico Bajo Hofner electrico, te servira en tu viaje");
+            jugador.setArma(poderosaElectrica);
+
+        }else {
+            System.out.println("Sigues aqui? Ve a por mis vinilos");
+        }
     }
 
     private void verEstadisticas() {
@@ -182,9 +246,38 @@ public class Juego {
                 break;
             case CIUDAD:
                 System.out.println("¡Completaste todas las zonas!");
+                System.out.println("Gracias por jugar!!");
                 return;
         }
         System.out.println("¡Has llegado a la " + zonaActual + "!");
+    }
+
+    public void limpiarConsola()
+    {
+        for(int i=0;i<100;i++){
+            System.out.println();
+        }
+    }
+
+
+    public String leerUnInputString () {
+        String opcion= "escribirNuevamente";
+        scanner= new Scanner(System.in);
+
+        do{
+
+            try {
+                opcion= scanner.nextLine();
+
+            }catch (Exception e)
+            {
+                opcion="escrbirNuevamente";
+                System.out.println("Escribi una palabra por favor!");
+            }
+        }
+        while ("escribirNuevamente".equals(opcion));
+
+        return opcion;
     }
 
     public Personaje crearJugadors() {
@@ -193,11 +286,11 @@ public class Juego {
 
         // Nombre del personaje
         System.out.print("Ingresa el nombre del personaje: ");
-        String nombre = scanner.nextLine();
+        String nombre = leerUnInputString();
 
         // Clase del personaje
         System.out.print("Elige una clase (Enano, Humano, NoMuerto, Pandaren): ");
-        String claseInput = scanner.nextLine();
+        String claseInput = leerUnInputString();
         TodasLasClases clase;
         try {
             clase = TodasLasClases.valueOf(claseInput);

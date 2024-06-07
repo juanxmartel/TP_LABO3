@@ -1,6 +1,6 @@
 package Modelos.Objeto;
 
-public abstract class Item {
+public class Item {
     private String nombre;
     private double peso;
     private int id;
@@ -9,6 +9,11 @@ public abstract class Item {
         this.nombre = nombre;
         this.peso = peso;
         this.id++;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
 
     public double getPeso() {

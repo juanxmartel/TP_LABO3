@@ -12,16 +12,23 @@ import java.util.Scanner;
 public class ElfoMago extends Personaje {
     Scanner scanner;
 
-    DatosClima datos = new DatosClima();
+    DatosClima datos = ClimaAPI.obtenerDatosClima();
+
 
     public ElfoMago(String nombre, double vida) {
         super(nombre, vida, 1);
         Arma Baston = new Arma("Baston",6,30, TipoArma.FUEGO);
         this.setArma(Baston);
     }
+    public ElfoMago(String nombre, double vida, int nivel) {
+        super(nombre, vida, nivel);
+        Arma Baston = new Arma("Baston",6,30, TipoArma.FUEGO);
+        this.setArma(Baston);
+    }
 
     @Override
     public void atacar(Personaje objetivo) {
+        ClimaAPI.actualizarDatosClima("2024-05-05");
         System.out.println("Tus ataques son:");
         System.out.println("1: Bola de fuego");
         System.out.println("2: Impactrueno");

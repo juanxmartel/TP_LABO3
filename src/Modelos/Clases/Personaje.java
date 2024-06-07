@@ -14,7 +14,7 @@ public abstract class Personaje implements Serializable {
     private double vida;
     private int nivel;
     private Arma arma;
-    private ListaGenerica<Item> inventario;
+    public ListaGenerica<Item> inventario;
 
     public Personaje(String nombre, double vida, int nivel) {
         this.nombre = nombre;
@@ -63,12 +63,28 @@ public abstract class Personaje implements Serializable {
     //implementar interfaz inventario
 
 
+    public ListaGenerica<Item> getInventario() {
+        return inventario;
+    }
+
     public void agarrarObjeto(Personaje objetivo) {
+        Scanner scanner = new Scanner(System.in); // Crear Scanner aquí para reutilizarlo
+
         objetivo.inventario.listarElementos();
-        new Scanner(System.in);
-        System.out.println("cual desea agarrar?");
-        int opcion= scanner.nextInt();
-        this.inventario.agregarElemento(objetivo.inventario.devolverUno(opcion));
+        System.out.println("¿Cuál desea agarrar?");
+        int opcion = scanner.nextInt();
+
+        // Verificar que el índice es válido
+        if (opcion >= 0 && opcion < objetivo.inventario.contarElementos()) {
+            Item itemAgarrado = objetivo.inventario.devolverUno(opcion);
+            this.inventario.agregarElemento(itemAgarrado);
+            objetivo.inventario.eliminarElemento(itemAgarrado);
+            System.out.println("Has agarrado: " + itemAgarrado);
+        } else {
+            System.out.println("Opción no válida.");
+        }
+
+        // No cerrar el Scanner si se reutiliza en otras partes del código
     }
     @Override
     public String toString() {

@@ -49,6 +49,7 @@ public class LogicaDelJuego {
 
 
 
+
     //Crea un indice aleatorio para luego enviarlo a crear un enemigo
     public static TodasLasClases seleccionarClaseAleatoria() {
         TodasLasClases[] clases = TodasLasClases.values();

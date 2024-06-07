@@ -36,8 +36,7 @@ public class ListaGenerica <T> implements IGenerica<T>, Serializable {
         int i =0;
         for(T objetos:listaGenerica)
         {
-            System.out.println(i);
-            System.out.println(objetos.toString());
+            System.out.println(i+") "+objetos.toString());
             i++;
         }
 
@@ -46,6 +45,24 @@ public class ListaGenerica <T> implements IGenerica<T>, Serializable {
     public T devolverUno(int indice){
      T cosa =listaGenerica.get(indice);
      return cosa;
+    }
+
+    public int contarElementosEspecifico(T elemnto) {
+        int i =0;
+        for(T elemento:listaGenerica)
+        {
+            if(elemento==elemnto)
+            {i++;}
+        }
+        return i;
+    }
+
+    public void eliminarElementosEspecifico(T elemnto) {
+        for(T elemento:listaGenerica)
+        {
+            if(elemento==elemnto)
+            {listaGenerica.remove(elemento);}
+        }
     }
 }
 

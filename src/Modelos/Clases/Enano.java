@@ -7,21 +7,22 @@ import Interfaces.iCabezaso;
 import Modelos.Objeto.Arma;
 import Modelos.Objeto.Item;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Enano extends Personaje implements IPlacaje, iCabezaso {
+public class Enano extends Personaje implements IPlacaje, iCabezaso, Serializable {
 
     Scanner scanner;
 
     public Enano(String nombre, double vida) {
         super(nombre, vida + 30 ,1);
-        Arma garrote = new Arma("Garrote",30,999, TipoArma.HIELO);
+        Arma garrote = new Arma("Garrote",30,20, TipoArma.HIELO);
         this.setArma(garrote);
     }
     public Enano(String nombre, double vida, int nivel) {
         super(nombre, vida + 30 ,nivel);
-        Arma garrote = new Arma("Garrote",30,999, TipoArma.HIELO);
+        Arma garrote = new Arma("Garrote",30,20, TipoArma.HIELO);
         this.setArma(garrote);
     }
 
