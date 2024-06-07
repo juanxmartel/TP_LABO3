@@ -12,19 +12,21 @@ public class NoMuerto extends Humano implements iNecormancia {
 
     Scanner scanner;
 
-    public NoMuerto(String nombre, double vida, int nivel, ListaGenerica<Item> inventario) {
-        super(nombre, vida, 1,inventario);
-        Arma Ancla = new Arma("Ancla sucia",25,20.5, TipoArma.HIELO);
-        this.setArma(Ancla);
-
+    public NoMuerto(String nombre, double vida,int nivel) {
+        super(nombre,vida,nivel);
     }
+    public NoMuerto(String nombre, double vida) {
+        super(nombre, vida);
+    }
+
+
 
 
     @Override
     public void atacar(Personaje objetivo) {
         System.out.println("Tus ataques son:");
         System.out.println("1: ataque espada");
-        System.out.println("2: cabezaso");
+        System.out.println("2: cabezazo");
         System.out.println("3: superioridad racial");
         System.out.println("4: placaje");
         System.out.println("5: necrosar");

@@ -16,7 +16,7 @@ public abstract class Personaje implements Serializable {
     private Arma arma;
     private ListaGenerica<Item> inventario;
 
-    public Personaje(String nombre, double vida, int nivel, ListaGenerica<Item> inventario) {
+    public Personaje(String nombre, double vida, int nivel) {
         this.nombre = nombre;
         this.vida = vida;
         this.nivel = nivel;
@@ -86,15 +86,6 @@ public abstract class Personaje implements Serializable {
 
     Scanner scanner;
 
-    //estadisticas
-    public void mostrarEstadisticas(){
-        System.out.println("Personaje{" + "\n" +
-                "nombre=" + nombre + "\n" +
-                "vida=" + vida + "\n" +
-                "nivel=" + nivel + "\n" +
-                "daño=" + arma.getDano() + "\n");
-    }
-
 
     //Ataque
     public abstract void atacar(Personaje objetivo);
@@ -110,8 +101,21 @@ public abstract class Personaje implements Serializable {
         return arma.getDano();
     }
 
+    public void subirNivel() {
+        this.nivel++;
+        System.out.println(getNombre() + " ha subido al nivel " + getNivel() + "!");
+        this.vida += 20; // Incrementar la vida como recompensa por subir de nivel
+    }
 
     //enum estado de animo
 
 
+    //stats
+    public void mostrarEstadisticas(){
+        System.out.println("Personaje{" + "\n" +
+                "nombre=" + nombre + "\n" +
+                "vida=" + vida + "\n" +
+                "nivel=" + nivel + "\n" +
+                "daño=" + arma.getDano() + "\n");
+    }
 }

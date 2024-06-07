@@ -12,8 +12,13 @@ public class Pandaren extends Personaje implements IPlacaje {
 
     Scanner scanner;
 
-    public Pandaren(String nombre, double vida, int nivel ,ListaGenerica<Item> inventario) {
-        super(nombre, vida, 1, inventario);
+    public Pandaren(String nombre, double vida) {
+        super(nombre, vida, 1);
+        Arma PalitoBambu = new Arma("PalitoBambu",4.5,15, TipoArma.AGUA);
+        this.setArma(PalitoBambu);
+    }
+    public Pandaren(String nombre, double vida, int nivel) {
+        super(nombre, vida, 1);
         Arma PalitoBambu = new Arma("PalitoBambu",4.5,15, TipoArma.AGUA);
         this.setArma(PalitoBambu);
     }

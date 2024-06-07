@@ -14,21 +14,36 @@ public class Enano extends Personaje implements IPlacaje, iCabezaso {
 
     Scanner scanner;
 
-    public Enano(String nombre, double vida, int nivel, ListaGenerica<Item> inventario) {
-        super(nombre, vida + 30 ,1,inventario);
-        Arma garrote = new Arma("Garrote",30,20, TipoArma.HIELO);
+    public Enano(String nombre, double vida) {
+        super(nombre, vida + 30 ,1);
+        Arma garrote = new Arma("Garrote",30,999, TipoArma.HIELO);
+        this.setArma(garrote);
+    }
+    public Enano(String nombre, double vida, int nivel) {
+        super(nombre, vida + 30 ,nivel);
+        Arma garrote = new Arma("Garrote",30,999, TipoArma.HIELO);
         this.setArma(garrote);
     }
 
 
     public void atacar(Personaje objetivo){
         System.out.println("Tus ataques son:");
-        System.out.println("1: placaje");
-        System.out.println("2: ataque espada");
-        System.out.println("3: cabezaso");
+        System.out.println("1. Placaje");
+        System.out.println("2. Ataque con espada");
+        System.out.println("3. Cabezazo");
         double danio=0;
         scanner = new Scanner(System.in);
-        scanner.nextInt();
+        int opcion = scanner.nextInt();
+        switch (opcion){
+            case 1: danio = this.placaje(objetivo);
+            break;
+            case 2: danio = this.atacarConArma();
+            break;
+            case 3 : danio = this.cabezaso(objetivo);
+            break;
+            default:
+                System.out.println("no elegiste bien la opcion, perdiste tu turno 🙂 ");
+        }
         objetivo.recibirDanio(danio);
     }
 

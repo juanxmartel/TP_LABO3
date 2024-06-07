@@ -14,8 +14,8 @@ public class ElfoMago extends Personaje {
 
     DatosClima datos = new DatosClima();
 
-    public ElfoMago(String nombre, double vida, int nivel, ListaGenerica<Item> inventario) {
-        super(nombre, vida, 1, inventario);
+    public ElfoMago(String nombre, double vida) {
+        super(nombre, vida, 1);
         Arma Baston = new Arma("Baston",6,30, TipoArma.FUEGO);
         this.setArma(Baston);
     }

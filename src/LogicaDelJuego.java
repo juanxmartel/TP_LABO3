@@ -46,11 +46,7 @@ public class LogicaDelJuego {
                    System.out.println();
                }
            }
-        //frenar el juego hasta que aprete la tecla
-       public void presionarParaContinuar(){
-           System.out.println("apretar cualquier tecla para continuar");
-           scanner.next();
-       }
+
 
 
     //Crea un indice aleatorio para luego enviarlo a crear un enemigo
@@ -59,7 +55,7 @@ public class LogicaDelJuego {
         int indiceAleatorio = new Random().nextInt(clases.length);
         return clases[indiceAleatorio];
     }
-
+/*
     //con el indice podemos llamar a esta instancia y crear la clase aleatoria
     public static Object crearInstancia(TodasLasClases clase) {
         switch (clase) {
@@ -85,7 +81,7 @@ public class LogicaDelJuego {
             presionarParaContinuar();
             batalla((Personaje) random);
        }
-
+*/
         public void batalla(Personaje enemigo)
         {
             boolean vivo = true;

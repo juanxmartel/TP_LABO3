@@ -15,8 +15,13 @@ public class Humano extends Personaje implements IPlacaje, iCabezaso {
 
 
 
-    public Humano(String nombre, double vida, int nivel, ListaGenerica<Item> inventario) {
-        super(nombre, vida, 1, inventario);
+    public Humano(String nombre, double vida) {
+        super(nombre, vida, 1);
+        Arma Latigo = new Arma("Latigo",2,20, TipoArma.ELECTRICO);
+        this.setArma(Latigo);
+    }
+    public Humano(String nombre, double vida, int nivel) {
+        super(nombre, vida,nivel);
         Arma Latigo = new Arma("Latigo",2,20, TipoArma.ELECTRICO);
         this.setArma(Latigo);
     }

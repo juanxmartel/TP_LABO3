@@ -11,8 +11,13 @@ public class Goblin extends Personaje {
     Scanner scanner;
 
 
-    public Goblin(String nombre, double vida, int nivel, ListaGenerica<Item> inventario) {
-        super(nombre, vida,1 ,inventario);
+    public Goblin(String nombre, double vida) {
+        super(nombre, vida,1 );
+        Arma ArcoYFlecha = new Arma("ArcoYFlechas",14,40, TipoArma.FUEGO);
+        this.setArma(ArcoYFlecha);
+    }
+    public Goblin(String nombre, double vida, int nivel) {
+        super(nombre, vida,nivel );
         Arma ArcoYFlecha = new Arma("ArcoYFlechas",14,40, TipoArma.FUEGO);
         this.setArma(ArcoYFlecha);
     }
