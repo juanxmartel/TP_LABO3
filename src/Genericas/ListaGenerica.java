@@ -5,6 +5,9 @@ import Modelos.Objeto.Item;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
+/**
+ * Clase la cual se encarga de gestionar cualquier lista generica que utilicemos. En este caso, fue solo utilizada para el inventario del personaje*/
 public class ListaGenerica <T> implements IGenerica<T>, Serializable {
 
      ArrayList<T> listaGenerica;
@@ -36,8 +39,7 @@ public class ListaGenerica <T> implements IGenerica<T>, Serializable {
         int i =0;
         for(T objetos:listaGenerica)
         {
-            System.out.println(i);
-            System.out.println(objetos.toString());
+            System.out.println(i+") "+objetos.toString());
             i++;
         }
 
@@ -46,6 +48,24 @@ public class ListaGenerica <T> implements IGenerica<T>, Serializable {
     public T devolverUno(int indice){
      T cosa =listaGenerica.get(indice);
      return cosa;
+    }
+
+    public int contarElementosEspecifico(T elemnto) {
+        int i =0;
+        for(T elemento:listaGenerica)
+        {
+            if(elemento.equals(elemnto))
+            {i++;}
+        }
+        return i;
+    }
+
+    public void eliminarElementosEspecifico(T elemnto) {
+        for(T elemento:listaGenerica)
+        {
+            if(elemento==elemnto)
+            {listaGenerica.remove(elemento);}
+        }
     }
 }
 
